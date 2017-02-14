@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+ <% include ./partials/head %>
+
+ <body>
+
+  <div class="jumbotron text-center">
+    <h2>Have a question? Contact with me</h2>
+
+  </div>
+
+  <% include ./partials/header %>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+
+
+
+
+      </div>
+      <div class="col-sm-4">
+
+      <br>
+      <br>
+
+        <form enctype = "multipart/form-data" method= "post">
+
+        <div class="form-group">
+          <label for="exampleInputEmail1">Upload File:</label>
+          <input type="file" class="form-control" id="file" placeholder="file" name="file" required>
+        </div>
+        
+        <input type="submit" value="Upload" name="submit">
+      </form>
+    </div>
+    
+    <div class="col-sm-4">
+
+    </div>
+  </div>
+</div>
+<br>
+<br>
+
+
+<% include ./partials/footer %>
+
+</body>
+</html>
+

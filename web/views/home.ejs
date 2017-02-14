@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<% include ./partials/head %>
+
+
+</head>
+<body>
+
+
+  <div class="jumbotron text-center">
+    <h3>Here we will See the CRUD operation using Arrow </h3>
+
+  </div>
+
+  <% include ./partials/header %>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+        <h3>Read the Car Info</h3>
+        
+        <ul>
+          <% for(var i=0; i<cars.length; i++) { %>
+          <li>
+
+           Name: <%= cars[i].name %>
+           <br>
+           Model: <%= cars[i].model %>
+           <br>
+           Color: <%= cars[i].color %>
+           <br>
+           ID: <%= cars[i].id %>
+           <br>
+
+           <br>
+           <br>
+         </li>
+         <% } %>
+       </ul>
+     </div>
+
+
+     <div class="col-sm-4">
+      <h3>Update, Delete and search</h3>
+      <form method="post">
+        <div class="form-group">
+          <label for="id">ID:</label>
+          <input type="text" class="form-control" id="id" placeholder="ID Value" name="id" required>
+        </div>
+
+        <button type="button" class="btn btn-default" id="search">Search</button>
+      </form>
+
+      <br>
+      <br>
+
+      <form method="post">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" class="form-control" id="name" placeholder="name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="model">Model:</label>
+          <input type="text" class="form-control" id="model" placeholder="model" name="model" required>
+        </div>
+
+        <div class="form-group">
+          <label for="color">Color:</label>
+          <input type="text" class="form-control" id="color" placeholder="color" name="color" required>
+        </div>
+
+        <button type="button" class="btn btn-default" id="delete">Delete</button>
+        <button type="button" class="btn btn-default" id="update">Update</button>
+      </form>
+    </div>
+
+
+
+    <div class="col-sm-4">
+      <h3>Enter Car Info</h3>        
+      <form method="post">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Name:</label>
+          <input type="text" class="form-control" id="name" placeholder="name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Model:</label>
+          <input type="text" class="form-control" id="model" placeholder="model" name="model" required>
+        </div>
+
+        <div class="form-group">
+          <label for="exampleInputPassword1">Color:</label>
+          <input type="text" class="form-control" id="color" placeholder="color" name="color" required>
+        </div>
+
+        <button type="Submit" class="btn btn-default" id="sendData">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+<br>
+<br>
+
+<% include ./partials/footer %>
+</body>
+</html>
+
+<script type="text/javascript">
+
+
+  $("#search").click(function(){
+
+    var id  = $("#id").val();
+    
+   
+
+    if(id!="")
+    {
+     
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+
+        if (this.readyState == 4 && this.status == 200) {
+          
+
+         var data = JSON.parse(this.responseText);
+
+
+         $("#name").val(data.car.name);
+         $("#model").val(data.car.model);
+         $("#color").val(data.car.color);
+
+       }
+     };
+     xhr.open("GET","/api/car/"+id+"");
+//FIXME: you need to fetch your APIKey but not store in code
+//It must be returned as a Base64 encoded value "apikey:"
+//Define as the APIKEY variable or set below
+var APIKEY = "vl13oRoqp400sAm5Zv0aZgFuHEsECRsA:";
+
+
+
+//var authstr = 'Basic ' + APIKEY.replace(/[\r\n]+/gm,'');
+var authstr = 'Basic ' + btoa(APIKEY);
+
+xhr.setRequestHeader('Authorization', authstr);
+xhr.send();
+
+
+}
+
+
+
+});
+
+  $("#delete").click(function(event) {
+
+
+    var id  = $("#id").val();
+    
+
+    if(id!="")
+    {
+     
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+
+        if (this.readyState===4) {
+        //alert(this.status+':'+this.responseText);
+        location.reload();
+      }
+    };
+    xhr.open("DELETE","/api/car/"+id+"");
+//FIXME: you need to fetch your APIKey but not store in code
+//It must be returned as a Base64 encoded value "apikey:"
+//Define as the APIKEY variable or set below
+var APIKEY = "vl13oRoqp400sAm5Zv0aZgFuHEsECRsA:";
+
+
+
+//var authstr = 'Basic ' + APIKEY.replace(/[\r\n]+/gm,'');
+var authstr = 'Basic ' + btoa(APIKEY);
+
+xhr.setRequestHeader('Authorization', authstr);
+xhr.send();
+
+
+}
+
+
+
+
+});
+
+
+
+
+  $("#update").click(function(event) {
+
+
+    var id  = $("#id").val();
+
+    var name = $("#name").val();
+    var model = $("#model").val();
+    var color = $("#color").val();
+
+    
+
+    if(id!="")
+    {
+     
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+
+        if (this.readyState===4) {
+        //alert(this.status+':'+this.responseText);
+        location.reload();
+      }
+    };
+    xhr.open("PUT","/api/car/"+id+"");
+//FIXME: you need to fetch your APIKey but not store in code
+//It must be returned as a Base64 encoded value "apikey:"
+//Define as the APIKEY variable or set below
+var APIKEY = "vl13oRoqp400sAm5Zv0aZgFuHEsECRsA:";
+
+
+//var authstr = 'Basic ' + APIKEY.replace(/[\r\n]+/gm,'');
+var authstr = 'Basic ' + btoa(APIKEY);
+
+xhr.setRequestHeader('Authorization', authstr);
+xhr.setRequestHeader('Content-Type','application/json');
+xhr.send(JSON.stringify({
+  "name":  name,
+  "model":model,
+  "color": color
+}));
+
+
+}
+
+
+
+
+});
+
+
+
+</script>>
