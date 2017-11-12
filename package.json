@@ -13,9 +13,10 @@
   "private": true,
   "dependencies": {
     "async": "^1.5.0",
+    "js-beautify": "1.6.14",
     "lodash": "^3.10.1",
-    "multer": "^1.2.1",
-    "nodemailer": "^2.7.0",
+    "multer": "^1.3.0",
+    "nodemailer": "^4.1.3",
     "pkginfo": "^0.3.1"
   },
   "devDependencies": {
@@ -30,12 +31,10 @@
     "request": "^2.67.0"
   },
   "main": "app.js",
-  "healthCheck": true,
+  "healthCheck": false,
   "scripts": {
     "start": "appc run",
     "test": "grunt"
   },
-  "engines": {
-    "node": "4.6.2"
-  }
+  "engines": {}
 }

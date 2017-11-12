@@ -35,7 +35,7 @@ var home = Arrow.Router.extend({
             if (err) {
                 next(err);
             } else {
-                req.log.info('got cars ' + JSON.stringify(results));
+                //req.log.info('got cars ' + JSON.stringify(results));
                 resp.render('home', { cars: results });
             }
 

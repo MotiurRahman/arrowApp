@@ -40,7 +40,8 @@ module.exports = {
 		// location of the logs if enabled
 		logdir: './logs',
 		// turn on transaction logs
-		transactionLogEnabled: true
+		transactionLogEnabled: true,
+		adiLogging: false
 	},
 
 	// prefix to use for apis
@@ -63,9 +64,9 @@ module.exports = {
 		// set to true to allow the admin website to be accessed in production. however, you will still need a
 		// login unless disableAuth is false. if you set this to false, the admin website will not be enabled
 		// when in production (still respects enabled above)
-		enableAdminInProduction: false,
+		enableAdminInProduction: true,
 		// set the email addresses you want to be able to log in to the admin website
-		validEmails: ["morahman@appcelerator.com"],
+		validEmails: ["morahman@axway.com"],
 		// set the organization ids you want to be able to log in to the admin website
 		validOrgs: [100000208]
 	},
@@ -83,6 +84,13 @@ module.exports = {
 
 	// if you want signed cookies, you can set this value. if you don't want signed cookies, remove or make null
 	cookieSecret: 'VtV+ChDEzJcVrocI/KBO6h3kPKR26go8',
+
+	serialization: {
+		// Here for backwards compatibility with older arrow apps. When you set this to
+		// true, a model's primary key will always be exposed under 'id' instead of it's
+		// actual name
+		exposePrimaryKeyAsId: false
+	},
 
 	// your connector configuration goes here
 	connectors: {
